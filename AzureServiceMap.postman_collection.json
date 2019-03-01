@@ -1,0 +1,189 @@
+{
+	"info": {
+		"_postman_id": "a436efc8-6a7c-40db-b73e-00d3d74e61cb",
+		"name": "Azure Service Map",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "grant_type=client_credentials&\nresource=https://management.azure.com/&\nclient_id={{AppId}}&\nclient_secret={{AppKey}}"
+				},
+				"url": {
+					"raw": "https://login.microsoftonline.com/{{TenantId}}/oauth2/token?api-version=1.0",
+					"protocol": "https",
+					"host": [
+						"login",
+						"microsoftonline",
+						"com"
+					],
+					"path": [
+						"{{TenantId}}",
+						"oauth2",
+						"token"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "1.0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get VMs",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://management.azure.com/subscriptions/{{SubscriptionId}}/resourceGroups/{{ResourceGroupName}}/providers/Microsoft.OperationalInsights/workspaces/{{WorkspaceName}}/features/serviceMap/machines?api-version=2015-11-01-preview",
+					"protocol": "https",
+					"host": [
+						"management",
+						"azure",
+						"com"
+					],
+					"path": [
+						"subscriptions",
+						"{{SubscriptionId}}",
+						"resourceGroups",
+						"{{ResourceGroupName}}",
+						"providers",
+						"Microsoft.OperationalInsights",
+						"workspaces",
+						"{{WorkspaceName}}",
+						"features",
+						"serviceMap",
+						"machines"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2015-11-01-preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create VM Group",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{Token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"kind\": \"machineGroup\",\r\n  \"properties\": {\r\n    \"displayName\": \"Test VM Group\",\r\n    \"count\": 1,\r\n    \"machines\": [\r\n    ]\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "https://management.azure.com/subscriptions/{{SubscriptionId}}/resourceGroups/{{ResourceGroupName}}/providers/Microsoft.OperationalInsights/workspaces/{{WorkspaceName}}/features/serviceMap/machineGroups?api-version=2015-11-01-preview",
+					"protocol": "https",
+					"host": [
+						"management",
+						"azure",
+						"com"
+					],
+					"path": [
+						"subscriptions",
+						"{{SubscriptionId}}",
+						"resourceGroups",
+						"{{ResourceGroupName}}",
+						"providers",
+						"Microsoft.OperationalInsights",
+						"workspaces",
+						"{{WorkspaceName}}",
+						"features",
+						"serviceMap",
+						"machineGroups"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2015-11-01-preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get VM Groups",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://management.azure.com/subscriptions/{{SubscriptionId}}/resourceGroups/{{ResourceGroupName}}/providers/Microsoft.OperationalInsights/workspaces/{{WorkspaceName}}/features/serviceMap/machineGroups?api-version=2015-11-01-preview",
+					"protocol": "https",
+					"host": [
+						"management",
+						"azure",
+						"com"
+					],
+					"path": [
+						"subscriptions",
+						"{{SubscriptionId}}",
+						"resourceGroups",
+						"{{ResourceGroupName}}",
+						"providers",
+						"Microsoft.OperationalInsights",
+						"workspaces",
+						"{{WorkspaceName}}",
+						"features",
+						"serviceMap",
+						"machineGroups"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2015-11-01-preview"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
